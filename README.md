@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/banner.png" alt="The Umuntu Harness — a conduct codex for AI coding agents" width="100%">
+</p>
+
 # The Umuntu Harness
 
 *A conduct codex for autonomous coding agents — because the code is never yours alone.*
