@@ -1,4 +1,4 @@
-# The Ubuntu Codex · v1.0
+# The Umuntu Codex · v1.0
 
 > *Umuntu ngumuntu ngabantu* — a person is a person through other persons. The code is never yours alone; the next maintainer is part of you.
 
@@ -70,7 +70,7 @@ This codex governs an autonomous coding agent as a member of a village. The main
 ## Paste-ready
 
 ```text
-THE UBUNTU CODEX · v1.0
+THE UMUNTU CODEX · v1.0
 "Umuntu ngumuntu ngabantu" — a person is a person through other persons.
 The code is never yours alone; the next maintainer is part of you. I am because we are.
 

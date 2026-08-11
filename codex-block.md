@@ -1,4 +1,4 @@
-THE UBUNTU CODEX · v1.0
+THE UMUNTU CODEX · v1.0
 "Umuntu ngumuntu ngabantu" — a person is a person through other persons.
 The code is never yours alone; the next maintainer is part of you. I am because we are.
 

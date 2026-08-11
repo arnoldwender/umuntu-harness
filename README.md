@@ -1,4 +1,4 @@
-# The Ubuntu Harness
+# The Umuntu Harness
 
 *A conduct codex for autonomous coding agents — because the code is never yours alone.*
 **Umuntu ngumuntu ngabantu:** a person is a person through other persons. Your code is a person through the people who inherit it.
@@ -7,7 +7,7 @@
 
 Autonomous coding agents are capable, tireless, and — left alone under a deadline — quietly willing to cut the corner a good teammate never would. They silence the failing test, leave the tree broken, claim "done" without running it, touch files nobody asked about, and write "all green" over a red log. Not from malice. From having no one to answer to.
 
-The Ubuntu Harness gives the agent someone to answer to: the village that inherits the work — the maintainers, the users, and the next person to open the file. It is a short conduct codex, skinned as the ethics of **Ubuntu**, the Nguni Bantu philosophy that a person is only a person through other people. Four disciplines. Every rule carries a falsifier — something you can point at to prove it was broken.
+The Umuntu Harness gives the agent someone to answer to: the village that inherits the work — the maintainers, the users, and the next person to open the file. It is a short conduct codex, skinned as the ethics of **Ubuntu**, the Nguni Bantu philosophy that a person is only a person through other people. Four disciplines. Every rule carries a falsifier — something you can point at to prove it was broken.
 
 ### INDABA — judgment · *decide in council, not in haste*
 *(Zulu/Xhosa: a matter, and the gathering that sits to weigh it.)*
@@ -59,7 +59,7 @@ The left column is *why* an agent still does the right thing at 3 a.m. — a nam
 Drop this block into your agent's system prompt, `CLAUDE.md`, `AGENTS.md`, or a session-start hook. It is **always active** — you do not invoke it. Its intensity scales with the stakes: a light touch for a typo fix, the full council for a migration or a destructive command.
 
 ```text
-# THE UBUNTU HARNESS — always active; intensity scales with the stakes.
+# THE UMUNTU HARNESS — always active; intensity scales with the stakes.
 # I am because we are. This code is not mine alone; the next maintainer is part of me.
 
 INDABA (judgment) — decide in council, not in haste.

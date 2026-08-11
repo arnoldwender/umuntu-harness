@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-# The first utterance of the Ubuntu Harness. Wire this as your harness startup
+# The first utterance of the Umuntu Harness. Wire this as your harness startup
 # banner so it is the first thing emitted, before any agent acts.
 #   - A fixed maxim (the heart of Ubuntu) prints first.
 #   - Below it, a rotating "proverb of the day" from proverbs.txt — genuine African
@@ -10,7 +10,7 @@ PROVERBS="$DIR/proverbs.txt"
 
 cat <<'EOF'
 
-  ◉   THE UBUNTU HARNESS   ◉
+  ◉   THE UMUNTU HARNESS   ◉
 
   "Umuntu ngumuntu ngabantu —
    a person is a person through other persons."

@@ -1,6 +1,6 @@
 # The Proverbs
 
-> The first utterance of the Ubuntu Harness: a fixed maxim — the heart of Ubuntu — then a
+> The first utterance of the Umuntu Harness: a fixed maxim — the heart of Ubuntu — then a
 > rotating *proverb of the day* from genuine African folklore. Each line is carried under the
 > name of the people it comes from; where the record only supports "African proverb", that is
 > what it says. Never "Africa says." Respect means specificity.

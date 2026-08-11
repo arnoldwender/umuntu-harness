@@ -28,7 +28,7 @@ the schema evolves):
     "SessionStart": [
       {
         "hooks": [
-          { "type": "command", "command": "/abs/path/to/ubuntu-harness/hooks/session-start.sh" }
+          { "type": "command", "command": "/abs/path/to/umuntu-harness/hooks/session-start.sh" }
         ]
       }
     ]
