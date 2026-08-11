@@ -1,0 +1,30 @@
+#!/usr/bin/env sh
+# The first utterance of the Ubuntu Harness. Wire this as your harness startup
+# banner so it is the first thing emitted, before any agent acts.
+#   - A fixed maxim (the heart of Ubuntu) prints first.
+#   - Below it, a rotating "proverb of the day" from proverbs.txt — genuine African
+#     folklore, each carried under the name of the people it comes from. Edit
+#     proverbs.txt to curate or extend. See PROVERBS.md.
+DIR=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+PROVERBS="$DIR/proverbs.txt"
+
+cat <<'EOF'
+
+  ◉   THE UBUNTU HARNESS   ◉
+
+  "Umuntu ngumuntu ngabantu —
+   a person is a person through other persons."
+     The code is a person through the people who inherit it.
+EOF
+
+# --- Rotating proverb of the day, from proverbs.txt ---
+if [ -f "$PROVERBS" ]; then
+  N=$(grep -c . "$PROVERBS")
+  if [ "$N" -gt 0 ]; then
+    DAY=$(date +%j | sed 's/^0*//')
+    [ -z "$DAY" ] && DAY=0
+    IDX=$(( (DAY % N) + 1 ))
+    P=$(sed -n "${IDX}p" "$PROVERBS")
+    [ -n "$P" ] && printf '\n  ◉ %s\n\n' "$P"
+  fi
+fi

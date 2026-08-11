@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use or adapt the Ubuntu Codex, please cite it."
+title: "The Ubuntu Codex"
+abstract: >-
+  A conduct codex for autonomous AI coding agents, skinned as the ethics of Ubuntu
+  (the Nguni Bantu philosophy, "a person is a person through other persons") — four
+  disciplines (the Commons, Indaba, Speaking True, Harambee), each rule carrying an
+  observable falsifier. Offered with respect. Part of a small family of conduct harnesses.
+type: dataset
+authors:
+  - family-names: Wender
+    given-names: Arnold
+version: "1.0"
+date-released: "2026-08-11"
+license: CC-BY-4.0
+repository-code: "https://github.com/arnoldwender/ubuntu-harness"
+keywords:
+  - AI agents
+  - agent harness
+  - conduct codex
+  - prompt engineering
+  - agent alignment
