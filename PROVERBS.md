@@ -30,4 +30,15 @@ per line) to curate or extend. The current pool:
 > - Wisdom is like a baobab tree; no one individual can embrace it — Akan & Ewe (Ghana, Togo & Benin)
 > - However far the stream flows, it never forgets its source — Yoruba, Nigeria
 
+## The discipline epigraphs
+
+Separate from the rotation: [`CODEX.md`](CODEX.md) opens each of the four disciplines with a
+proverb. Two of them are also in the pool above; two are not, and appear only there. Listed
+here so every quoted line in the repo has one place that accounts for it.
+
+> - *When the roots of a tree begin to decay, the decay spreads to the branches.* — Nigerian proverb — opens **THE COMMONS** (cleanliness). Not in the rotation pool.
+> - *Only a fool tests the depth of a river with both feet.* — African proverb — opens **INDABA** (judgment). Not in the rotation pool.
+> - *He who conceals his disease cannot expect to be cured.* — Ethiopia — opens **SPEAKING TRUE** (honesty). Also in the pool above.
+> - *However long the night, the dawn will break.* — African proverb — opens **HARAMBEE** (persistence). Also in the pool above.
+
 *The harness emits this first, on startup — [`bin/proverb`](bin/proverb).*
