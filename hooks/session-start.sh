@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-# The Ubuntu Harness — session-start hook.
+# The Umuntu Harness — session-start hook.
 #
 # Opens every session with the maxim + a rotating proverb, and keeps the four
 # disciplines present. Its stdout is meant to be injected into the agent's context
