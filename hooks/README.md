@@ -9,7 +9,7 @@ maxim and a proverb.
 Emits, to stdout:
 
 1. The **fixed maxim** (the heart of Ubuntu) + a rotating **proverb of the day**
-   (`bin/precept`, drawn from `proverbs.txt`).
+   (`bin/proverb`, drawn from `proverbs.txt`).
 2. The **conduct block** — the four disciplines, precedence, and the hard limit
    (`codex-block.md`).
 

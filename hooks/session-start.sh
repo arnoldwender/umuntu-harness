@@ -8,8 +8,8 @@
 set -eu
 ROOT=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
 
-# 1) The maxim + the proverb of the day (bin/precept).
-"$ROOT/bin/precept"
+# 1) The maxim + the proverb of the day (bin/proverb).
+"$ROOT/bin/proverb"
 
 # 2) The four disciplines — kept present in context, every session.
 echo ""

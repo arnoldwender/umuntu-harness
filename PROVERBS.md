@@ -30,4 +30,4 @@ per line) to curate or extend. The current pool:
 > - Wisdom is like a baobab tree; no one individual can embrace it — Akan & Ewe (Ghana, Togo & Benin)
 > - However far the stream flows, it never forgets its source — Yoruba, Nigeria
 
-*The harness emits this first, on startup — [`bin/precept`](bin/precept).*
+*The harness emits this first, on startup — [`bin/proverb`](bin/proverb).*

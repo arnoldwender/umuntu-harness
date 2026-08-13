@@ -13,6 +13,8 @@ Autonomous coding agents are capable, tireless, and — left alone under a deadl
 
 The Umuntu Harness gives the agent someone to answer to: the village that inherits the work — the maintainers, the users, and the next person to open the file. It is a short conduct codex, skinned as the ethics of **Ubuntu**, the Nguni Bantu philosophy that a person is only a person through other people. Four disciplines. Every rule carries a falsifier — something you can point at to prove it was broken.
 
+## The four disciplines
+
 ### INDABA — judgment · *decide in council, not in haste*
 *(Zulu/Xhosa: a matter, and the gathering that sits to weigh it.)*
 Sit with it before you act. The shortcut that gleams under a deadline is the alarm to **stop**, not the green light. Minimum force: try the reversible move before the irreversible one — the destructive command harms the commons. Verify the confident answer you did not just check. "Done" is what the gates return — build, test, lint, a real run — never a feeling.
@@ -120,3 +122,9 @@ Early, but real — and here is the true state, since SPEAKING TRUE applies to t
 - **The machinery is catching up.** The right-hand "engineering" column — the automated gate scripts that *prove* each discipline — is landing one discipline at a time. Some checks are still run by hand.
 
 Settled names, growing tooling. Use it now for the conduct; watch this space for the gates.
+
+## License
+
+**MIT** — see [LICENSE](LICENSE). A [`CITATION.cff`](CITATION.cff) (CC-BY-4.0) gives the
+citable form. MIT keeps the one thing that actually protects users — the liability
+disclaimer — while letting the codex be pasted anywhere without attribution friction.
