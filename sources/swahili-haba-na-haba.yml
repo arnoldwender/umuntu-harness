@@ -1,0 +1,31 @@
+# The only proverb here that reaches a published scholarly collection.
+#
+# Verified 2026-09-10. "Haba na haba hujaza kibaba" is genuine Swahili -
+# literally "little by little fills the kibaba", a kibaba being a traditional
+# small dry measure, so the English "fills the measure" is a faithful rendering
+# rather than a loose one. The proverb is present in the Swahili Proverbs
+# (Methali za Kiswahili) collection hosted by the Center for African Studies at
+# the University of Illinois, which is built on a real published book: Albert
+# Scheven, Swahili Proverbs: Nia Zikiwa Moja, Kilicho Mbali Huja (University
+# Press of America, 1981, ISBN 081911846X), a collection that grew to some 4,860
+# entries.
+#
+# WHAT WAS NOT ESTABLISHED, stated so the citation is not read as stronger than
+# it is: the page consulted did not display a per-entry Scheven catalogue
+# number, so the proverb is confirmed present in the collection but not pinned
+# to a page in the printed book. A search for a citation of this specific
+# proverb in Jan Knappert's published Swahili work also came back empty -
+# Knappert is a real Swahili scholar, but nothing here rests on him.
+work: "Swahili proverb (methali), East Africa"
+author: "Anonymous - Swahili oral tradition"
+author_born: "not applicable - anonymous oral tradition"
+author_died: "not applicable - anonymous oral tradition"
+year: "unknown as folklore; the Scheven collection that records it was published in 1981"
+edition: "Recorded in Swahili Proverbs - Methali za Kiswahili (University of Illinois, Center for African Studies), built on Albert Scheven, Swahili Proverbs, University Press of America, 1981."
+pd_status_us: "Anonymous traditional proverb - no copyright subsists. Scheven s 1981 book is in copyright, but the proverb itself is not his composition and the English used here is the ordinary literal rendering."
+pd_status_eu: "Anonymous traditional proverb - no copyright subsists."
+source_url: "https://swahiliproverbs.afrst.illinois.edu/proverbs.htm"
+provenance: verified
+provenance_note: "The proverb, its language and its literal sense are confirmed, and it is present in a university-hosted collection built on a published book. NOT established: a per-entry catalogue number or page in Scheven 1981, and no citation of this specific proverb was found in Jan Knappert s published work."
+quotes:
+  - "Little by little fills the measure (Haba na haba hujaza kibaba)"

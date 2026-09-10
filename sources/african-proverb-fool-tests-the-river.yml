@@ -1,0 +1,20 @@
+# UNVERIFIED. Unspecified origin, and the secondary guesses disagree.
+#
+# The repo s unspecified label is the honest one. See provenance_note.
+#
+# `author`, `author_born`, `author_died` and `year` carry prose because this is
+# anonymous oral folklore: there is no person and no date to record, and
+# inventing either to satisfy an arithmetic check would make the citation look
+# stronger than it is.
+work: "Proverb of unspecified African origin - attribution unconfirmed"
+author: "Anonymous - oral tradition"
+author_born: "not applicable - anonymous oral tradition"
+author_died: "not applicable - anonymous oral tradition"
+year: "unknown - anonymous oral tradition, no first attestation established"
+pd_status_us: "Anonymous traditional proverb - no copyright subsists. What is unverified is the ATTRIBUTION, not the copyright status."
+pd_status_eu: "Anonymous traditional proverb - no copyright subsists. What is unverified is the ATTRIBUTION, not the copyright status."
+source_url: "https://afriprov.tangaza.ac.ke/wp-content/uploads/2008/11/ebooks_maggy_duruma.pdf"
+provenance: unverified
+provenance_note: "Circulated with inconsistent secondary attributions - some collections say Ashanti or Fanti of Ghana. The specific leads located point instead to a Duruma (Mijikenda, Kenya) collection, with a themed Bangubangu (DR Congo) variant reading no one can measure the depth of a river with his two legs. Those leads are unconfirmed: the collections are scanned PDFs with no text layer. The repo s own label - African proverb, unspecified - is the honest one and is not contradicted by anything found; the more specific Ashanti or Fanti claim circulating elsewhere is not corroborated."
+quotes:
+  - "Only a fool tests the depth of a river with both feet"

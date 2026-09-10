@@ -1,0 +1,25 @@
+# One of only three proverbs in this repo that trace to something better than a
+# listicle, and the trail is dated.
+#
+# Verified 2026-09-10 by fetching the page itself: this is the November 2003
+# "Proverb of the Month" of the African Proverbs, Sayings and Stories project
+# (Joseph Healey), which is a curated scholarly collection and not a quote mill.
+# The wording matches word for word, the attribution on the page is "Akan,
+# Ghana, Ivory Coast" - exactly what this repo prints - and the entry carries
+# commentary crediting the African theologian John S. Pobee.
+#
+# A dated entry with a named commentator is what provenance looks like for oral
+# folklore. It is the standard the other ten proverbs in this repo are measured
+# against, and most of them do not meet it.
+work: "Akan proverb (Ghana and Cote d Ivoire)"
+author: "Anonymous - Akan oral tradition"
+author_born: "not applicable - anonymous oral tradition"
+author_died: "not applicable - anonymous oral tradition"
+year: "unknown as folklore; recorded in the African Proverbs project in November 2003"
+edition: "African Proverbs, Sayings and Stories - Proverb of the Month, November 2003, with commentary crediting John S. Pobee."
+pd_status_us: "Anonymous traditional proverb - no copyright subsists."
+pd_status_eu: "Anonymous traditional proverb - no copyright subsists."
+source_url: "https://afriprov.tangaza.ac.ke/november-2003-proverb-qthe-old-woman-looks-after-the-child-to-grow-its-teeth-and-the-young-one-in-turn-looks-after-the-old-woman-when-she-loses-her-teethq-akan-ghana-ivory-coast/"
+provenance: verified
+quotes:
+  - "The old woman looks after the child to grow its teeth, and the young one in turn looks after the old woman when she loses her teeth"
