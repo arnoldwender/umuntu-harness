@@ -1,0 +1,77 @@
+# The codex in this repo says "nothing half-done: suite green, every case and
+# every locale synced, the files left consistent with one another". This
+# workflow is that rule turned on the repo itself: gate/nobody_left.py refuses a
+# diff that touched one member of a set and left its siblings behind.
+#
+# Two jobs would double the Actions bill for no gain, so this one also re-runs
+# the self-check: a red gate and a red self-check are the same verdict.
+#
+# No step interpolates untrusted input into a shell. The one expression here
+# reaches `run:` through an `env:` variable, which the shell reads as data.
+name: gate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  # A new push on the same branch cancels the previous run: without this, a
+  # burst of commits pays for N runs and only the last one matters.
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  parity:
+    name: parity gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          # The gate reads a diff, so it needs the history that holds the base
+          # revision. The default depth of 1 leaves nothing to diff against, and
+          # the gate would exit 2 rather than pretend the diff was empty.
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v6
+        with:
+          # 3.11 is the declared floor - `tomllib` landed there. CI runs the
+          # floor so the README's claim is measured, not asserted.
+          python-version: "3.11"
+
+      - name: Install
+        run: python -m pip install --upgrade pip pytest
+
+      - name: Self-check (the repo keeps its own promises)
+        run: python3 scripts/check.py
+
+      - name: Parity gate
+        env:
+          BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
+        run: |
+          base="$BASE"
+          # A push event carries the previous tip; the all-zero sha means there
+          # was none (a new branch), and a pull_request carries neither.
+          case "$base" in
+            ""|0000000000000000000000000000000000000000) base="origin/main" ;;
+          esac
+          python3 gate/nobody_left.py --base "$base" --sarif parity.sarif
+
+      - name: Mutation check (do the tests defend the gate?)
+        run: python3 tests/mutation_check.py
+
+      - name: Tests
+        run: python3 -m pytest tests/ -q
+
+      - name: Upload SARIF
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: parity-sarif
+          path: parity.sarif
+          if-no-files-found: ignore
