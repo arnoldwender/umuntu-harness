@@ -1,0 +1,46 @@
+# Sets of files that travel together. `gate/nobody_left.py` reads this file: if
+# a diff touches one member of a cohort and not the rest, the gate goes red and
+# names exactly who was left behind.
+#
+# Two shapes are accepted.
+#
+#   [[cohort]]                     # an explicit list
+#   name = "locales"
+#   members = ["src/i18n/de.json", "src/i18n/en.json", "src/i18n/es.json"]
+#
+#   [[cohort]]                     # one {placeholder}, expanded over `values`
+#   name = "locale-pages"
+#   pattern = "src/pages/{locale}/**"
+#   values = ["de", "en", "es"]
+#
+# In the pattern form the placeholder marks where the locale sits in the path,
+# so `src/pages/de/preise.astro` is paired with `src/pages/en/preise.astro` and
+# `src/pages/es/preise.astro` — file by file, not directory by directory.
+# `*` matches within one path segment, `**` crosses them.
+#
+# Delete this file entirely and the gate falls back to autodetection: sibling
+# files that differ only in a locale code, and only when the siblings actually
+# exist in the tree. It never invents a set.
+#
+# The cohorts below are this repo's own. Each one is enforced elsewhere by
+# `scripts/check.py`, which checks that the CONTENTS agree; this gate catches
+# the moment earlier, when only one half of the pair was opened at all.
+
+# scripts/check.py refuses to pass unless CODEX.md's "## Paste-ready" block is
+# codex-block.md byte for byte. Editing one alone is already wrong for anyone
+# who pasted the other.
+[[cohort]]
+name = "codex-block"
+members = ["CODEX.md", "codex-block.md"]
+
+# Every line of the rotation pool must be listed in the pool document, or the
+# proverb of the day arrives with no attribution a reader can look up.
+[[cohort]]
+name = "proverb-pool"
+members = ["proverbs.txt", "PROVERBS.md"]
+
+# A check with no test that kills it is decoration. Changing the gate without
+# touching its suite is how a falsifier quietly stops falsifying.
+[[cohort]]
+name = "parity-gate"
+members = ["gate/nobody_left.py", "tests/test_nobody_left.py"]

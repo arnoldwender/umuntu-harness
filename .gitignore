@@ -2,5 +2,11 @@ node_modules/
 .DS_Store
 *.log
 
+# Byte-code and gate output. Both are produced by running the suite, and both
+# would otherwise show up as "changed files" in the parity gate's own diff.
+__pycache__/
+*.pyc
+*.sarif
+
 # Keep the repo's own assets/ tracked despite the case-insensitive global /Assets/ ignore (macOS)
 !/assets/

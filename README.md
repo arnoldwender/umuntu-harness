@@ -80,8 +80,63 @@ The left column is *why* an agent still does the right thing at 3 a.m. — a nam
 
 - **Paste the block.** Drop the contents of [`codex-block.md`](codex-block.md) into the instructions your agent already reads — `AGENTS.md`, `CLAUDE.md`, a system prompt, whatever your harness loads. It is the single source the hook and your agent file share.
 - **Or wire the hook.** [`hooks/session-start.sh`](hooks/session-start.sh) emits the first word and the conduct block at the top of every session — see [hooks/](hooks/).
+- **Run the gate.** [`gate/nobody_left.py`](gate/nobody_left.py) reads your diff and refuses one that touched a set in part — the locale file whose siblings never moved. See [The parity gate](#the-parity-gate).
 - **Read the whole codex.** [`CODEX.md`](CODEX.md) carries all sixteen rules — four to a discipline, one falsifier each — with the proverb that opens every discipline.
 - **Always active; intensity scales with the stakes.** You do not invoke it: a light touch for a typo fix, the full council for a migration or a destructive command.
+
+## The parity gate
+
+**Umuntu ngumuntu ngabantu** — a person is a person through other persons. A file is a file through the files that must agree with it.
+
+[`gate/nobody_left.py`](gate/nobody_left.py) is the executable half of HARAMBEE rule 2, *nothing half-done*, whose falsifier the codex already names: **one locale, case, or file was updated and its siblings left to drift.** The gate reads the diff and refuses it when a set moved in part. The most ordinary version of this failure is an agent editing `de.json`, shipping, and leaving `en.json` and `es.json` a key behind — nothing breaks, so nobody notices; the English reader just gets a German string, or a blank.
+
+```sh
+python3 gate/nobody_left.py                   # diff against origin/main
+python3 gate/nobody_left.py --base HEAD~1
+python3 gate/nobody_left.py --sarif parity.sarif
+```
+
+Exit `0` clean · `1` findings · `2` the gate itself could not run. The third is not decoration: when there is no git, or no base revision to diff against, the gate says so rather than returning the value that means "all good". No dependencies — Python 3.11+ and the standard library, which is also what CI runs, so the version claim is measured and not asserted.
+
+### The checks
+
+| Check | Goes red when | Deliberately quiet about |
+| --- | --- | --- |
+| `cohort-drift` | the diff touches part of a set and not the rest. The report names every file left behind, by path | a set the diff never touched — pre-existing drift is a different report |
+| `key-parity` | a touched set of `.json` files holds keys one member has and another does not. *Touching three files is not the same as syncing them,* and this is the check that knows the difference | non-JSON members, and files outside a touched set |
+| `signature-drift` | an exported Python function changes shape in a way that could break an existing call, and a caller elsewhere in the repo did not move with it | an appended optional parameter, underscore-private names, and anything a grep cannot see. A heuristic, marked as one in its own message: it asks you to look, it does not claim to know |
+| `cohort-config`, `invalid-json`, `unparseable-python` | a file the gate had to read could not be read. It reports the file and carries on with the other checks | — |
+
+Findings are text and, with `--sarif`, SARIF 2.1.0.
+
+### Declaring a set
+
+Sets live in [`.conduct/cohorts.toml`](.conduct/cohorts.toml) — TOML because `tomllib` is in the standard library, so declaring a cohort still costs no dependency. A `.conduct/cohorts.json` with the same shape is read instead if you prefer one config language.
+
+```toml
+[[cohort]]
+name = "locales"
+members = ["src/i18n/de.json", "src/i18n/en.json", "src/i18n/es.json"]
+
+[[cohort]]
+name = "locale-pages"
+pattern = "src/pages/{locale}/**"
+values = ["de", "en", "es"]
+```
+
+The pattern form marks where the locale sits in the path, so `src/pages/de/preise.astro` is paired with its English and Spanish twins **file by file**, not directory by directory. `*` stays inside one path segment; `**` crosses them.
+
+With no config file at all, the gate infers sets from the tree: sibling files that differ only in a locale code (`de en es fr it pt`), and **only when those siblings actually exist**. It will not demand a Spanish file nobody ever wrote — a repo with one locale is not a bug. Inferred sets are labelled `(autodetected)` in the report, so you always know whether the gate is enforcing your declaration or its own guess.
+
+[`.conduct/parity-allow.txt`](.conduct/parity-allow.txt) suppresses findings by path glob, optionally scoped to one check (`key-parity:src/i18n/*`). The gate prints how many findings the allowlist swallowed, every run — an allowlist that hides its own size is how a repo ends up green with exemptions nobody remembers granting.
+
+### What this does NOT automate
+
+One falsifier out of sixteen. This gate is HARAMBEE rule 2 and nothing else: THE COMMONS, INDABA and SPEAKING TRUE have no gate in this repo, and neither do HARAMBEE rules 1, 3 and 4. Those are still carried by the agent, not by a script.
+
+It also checks the *shape* of a change, not its meaning. It cannot tell you a translation is wrong — only that it never arrived. And [`scripts/check.py`](scripts/check.py) is a different thing again: it verifies this repo's own promises, not your diffs.
+
+The tests are the argument. [`tests/test_nobody_left.py`](tests/test_nobody_left.py) plants each desynchronisation and requires red, then plants the synchronised twin and requires green; [`tests/mutation_check.py`](tests/mutation_check.py) deletes each check in turn and requires the suite to notice. A check whose removal keeps the suite green was never being tested. Both run in CI on every push and pull request — [`.github/workflows/gate.yml`](.github/workflows/gate.yml).
 
 ## The first word
 
@@ -110,7 +165,7 @@ Early, but real — and here is the true state, since SPEAKING TRUE applies to t
 
 - **The codex is complete and stable.** The four disciplines, the precedence, and the falsifiers are settled. This is the Ubuntu edition in a small family of conduct codices that skin the same four disciplines in different traditions; each stands on its own, and this one is whole.
 - **The wiring ships now.** The paste block and the session-start hook work today. Drop them in and the discipline is live.
-- **The machinery is catching up.** The right-hand "engineering" column — the automated gate scripts that *prove* each discipline — is landing one discipline at a time. Some checks are still run by hand.
+- **The machinery is catching up.** The right-hand "engineering" column — the automated gate scripts that *prove* each discipline — is landing one discipline at a time. **One has landed:** [`gate/nobody_left.py`](gate/nobody_left.py) enforces HARAMBEE rule 2, *nothing half-done*, on the diff. That is one falsifier out of sixteen; the other fifteen are still run by hand, or by the agent's own discipline.
 
 Settled names, growing tooling. Use it now for the conduct; watch this space for the gates.
 

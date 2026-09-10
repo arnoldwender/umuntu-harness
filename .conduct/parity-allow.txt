@@ -1,0 +1,16 @@
+# Findings from gate/nobody_left.py that this repo has decided to live with.
+#
+# One entry per line. Two forms:
+#
+#   path/glob/**              suppress every finding whose path matches
+#   key-parity:src/i18n/*     suppress only that check for those paths
+#
+# Globs follow the gate's own rules: `*` stays inside one path segment, `**`
+# crosses them. A `#` starts a comment.
+#
+# The gate prints how many findings this file suppressed, every run. That is
+# deliberate: an allowlist that hides its own size is how a repo ends up green
+# with forty exemptions nobody remembers granting. If an entry here has outlived
+# its reason, delete it — the finding it was hiding is the report you wanted.
+#
+# This repo currently allows nothing.
