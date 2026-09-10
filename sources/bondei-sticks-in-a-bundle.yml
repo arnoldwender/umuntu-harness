@@ -1,0 +1,22 @@
+# UNVERIFIED. The weakest ethnic attribution in this repo, and it is the one the README leads with.
+#
+# The proverb is real in the sense that it circulates; what could not be confirmed is that it is
+# BONDEI. See provenance_note - the African Proverbs project s inventory of 131 collections does
+# not list the Bondei at all, and the same wording appears there under other peoples.
+#
+# `author`, `author_born`, `author_died` and `year` carry prose because this is
+# anonymous oral folklore: there is no person and no date to record, and
+# inventing either to satisfy an arithmetic check would make the citation look
+# stronger than it is.
+work: "Proverb attributed to the Bondei people of Tanzania - attribution unconfirmed"
+author: "Anonymous - oral tradition"
+author_born: "not applicable - anonymous oral tradition"
+author_died: "not applicable - anonymous oral tradition"
+year: "unknown - anonymous oral tradition, no first attestation established"
+pd_status_us: "Anonymous traditional proverb - no copyright subsists. What is unverified is the ATTRIBUTION, not the copyright status."
+pd_status_eu: "Anonymous traditional proverb - no copyright subsists. What is unverified is the ATTRIBUTION, not the copyright status."
+source_url: "https://afriprov.tangaza.ac.ke/inventory-of-131-collections-of-african-proverbs-and-sayings/"
+provenance: unverified
+provenance_note: "The PROVERB circulates widely; the attribution to the Bondei people of Tanzania could not be confirmed anywhere better than web proverb listicles that copy one another. Measured 2026-09-10 against the African Proverbs project s own inventory of 131 named ethnic-language collections: Bondei does not appear in it at all. The same wording is attributed within that corpus to other peoples entirely - Duruma (Kenya), and a Ganda/Kooki (Uganda) variant reading one stick at a time makes a bundle. Note also that a bundle of sticks that cannot be broken is the moral of Aesop s fable The Bundle of Sticks, surviving in Babrius from the 2nd century CE; that does not make the African instance false, but it means the motif is universal and its presence is not evidence FOR a Bondei origin. This is the proverb the README presents as the emblem-proverb of collective strength, so the gap between how prominently it is used and how thinly it is sourced is the widest in the repo."
+quotes:
+  - "Sticks in a bundle are unbreakable"

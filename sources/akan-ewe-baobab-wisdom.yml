@@ -1,0 +1,21 @@
+# The strongest single attribution in this repo.
+#
+# Verified 2026-09-10 by fetching the page: the July 1998 "Proverb of the Month"
+# of the African Proverbs, Sayings and Stories project - the oldest recurring
+# feature of that collection. Exact wording, and the attribution on the page is
+# "Akan and Ewe (Benin, Ghana and Togo)", which is what this repo prints. The
+# entry carries commentary quoting John S. Mbiti, the Kenyan scholar of African
+# religion and philosophy, on the impossibility of any one person mastering all
+# African proverbs - which is, appropriately, the proverb's own point.
+work: "Akan and Ewe proverb (Ghana, Togo and Benin)"
+author: "Anonymous - Akan and Ewe oral tradition"
+author_born: "not applicable - anonymous oral tradition"
+author_died: "not applicable - anonymous oral tradition"
+year: "unknown as folklore; recorded in the African Proverbs project in July 1998"
+edition: "African Proverbs, Sayings and Stories - Proverb of the Month, July 1998, with commentary quoting John S. Mbiti."
+pd_status_us: "Anonymous traditional proverb - no copyright subsists."
+pd_status_eu: "Anonymous traditional proverb - no copyright subsists."
+source_url: "https://afriprov.tangaza.ac.ke/july-1998"
+provenance: verified
+quotes:
+  - "Wisdom is like a baobab tree; no one individual can embrace it"

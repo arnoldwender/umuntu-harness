@@ -1,9 +1,22 @@
 # The Proverbs
 
 > The first utterance of the Umuntu Harness: a fixed maxim — the heart of Ubuntu — then a
-> rotating *proverb of the day* from genuine African folklore. Each line is carried under the
-> name of the people it comes from; where the record only supports "African proverb", that is
+> rotating *proverb of the day* from African folklore. Each line is carried under the
+> name of the people it is attributed to; where the record only supports "African proverb", that is
 > what it says. Never "Africa says." Respect means specificity.
+
+**Read the attributions as *attributed*, not as *documented*.** An audit on 2026-09-10 traced
+every line in this file, and the honest result is that **three of the thirteen** reach a source
+better than a chain of web proverb lists that copy one another. The other ten are marked
+`provenance: unverified` in [`sources/`](sources/), each with a note saying exactly what could
+not be confirmed — and for four of them the ethnic label found in the best available
+ethnographic index points to a **different people or country** than the one printed here.
+
+That is not a reason to delete them; oral folklore is genuinely hard to source, and a proverb
+with a thin paper trail is not thereby fake. It is a reason not to let a confident-looking
+label stand in for evidence. The per-line detail is in `sources/`, and
+[`gate/citations.py`](gate/citations.py) keeps every line here tied to a file that states its
+own uncertainty.
 
 ## The fixed maxim
 
@@ -21,7 +34,7 @@ per line) to curate or extend. The current pool:
 > - Rain does not fall on one roof alone — Cameroon
 > - A single bracelet does not jingle — Congolese (DR Congo)
 > - When spider webs unite, they can tie up a lion — Ethiopia
-> - Sticks in a bundle are unbreakable — Bondei people, Tanzania
+> - Sticks in a bundle are unbreakable — attributed to the Bondei people, Tanzania
 > - The old woman looks after the child to grow its teeth, and the young one in turn looks after the old woman when she loses her teeth — Akan, Ghana & Côte d'Ivoire
 > - Little by little fills the measure (Haba na haba hujaza kibaba) — Swahili, East Africa
 > - However long the night, the dawn will break — African proverb

@@ -74,7 +74,9 @@ The left column is *why* an agent still does the right thing at 3 a.m. — a nam
 
 **Because the names are load-bearing.** "Clean up after yourself" is forgettable. *The commons you leave whole for your village* is not. INDABA, HARAMBEE, THE COMMONS, SPEAKING TRUE — these are mnemonics built to survive a deadline, which is exactly when discipline is abandoned.
 
-**Because Africa is not one place, and we refuse to pretend it is.** Ubuntu is Nguni Bantu (Zulu, Xhosa, and kin). Harambee is Kiswahili, from Kenya. Indaba is Zulu and Xhosa. The proverbs in this harness come from many distinct peoples — Akan and Ewe in Ghana, Yoruba in Nigeria, Amharic-speaking Ethiopians, Swahili-speakers across East Africa, and more. We name the source where we know it, we say "African proverb" where the record only supports that, and we never write "Africa says." Respect means specificity.
+**Because Africa is not one place, and we refuse to pretend it is.** Ubuntu is Nguni Bantu (Zulu, Xhosa, and kin). Harambee is Kiswahili, from Kenya. Indaba is Zulu and Xhosa. The proverbs in this harness are attributed to many distinct peoples — Akan and Ewe in Ghana, Yoruba in Nigeria, Amharic-speaking Ethiopians, Swahili-speakers across East Africa, and more. We name the people where the record supports it, we say "African proverb" where it only supports that, and we never write "Africa says." Respect means specificity.
+
+**And respect also means not overstating what we know.** Specificity that is not backed is just a confident-sounding guess wearing a people's name, which is worse than "African proverb" — it borrows authority from a community that never granted it. So the attributions here are audited line by line in [`sources/`](sources/): **three of the thirteen** trace to a dated, curated collection or a published scholarly one, and **ten are marked `provenance: unverified`** with a note saying precisely what could not be confirmed. For four of those ten, the only concrete ethnographic pointer found names a *different* people or country than the label printed here. Those notes are the specificity this section is actually asking for.
 
 ## How to use
 
@@ -138,6 +140,36 @@ It also checks the *shape* of a change, not its meaning. It cannot tell you a tr
 
 The tests are the argument. [`tests/test_nobody_left.py`](tests/test_nobody_left.py) plants each desynchronisation and requires red, then plants the synchronised twin and requires green; [`tests/mutation_check.py`](tests/mutation_check.py) deletes each check in turn and requires the suite to notice. A check whose removal keeps the suite green was never being tested. Both run in CI on every push and pull request — [`.github/workflows/gate.yml`](.github/workflows/gate.yml).
 
+## The citation gate
+
+**Umuntu ngumuntu ngabantu** applies to a proverb too: a line is a line through the people it
+came from. Naming those people wrongly is not a small error — it borrows authority from a
+community that never granted it.
+
+[`gate/citations.py`](gate/citations.py) is the executable half of **SPEAK TRUE rule 4**,
+*invent nothing: no fabricated source, number, file path, or capability.* Every attributed
+quotation in this repo must resolve to a file in [`sources/`](sources/) that states the work,
+the people, the public-domain status, and — the field that matters most here — **how well the
+attribution is actually documented**.
+
+```sh
+python3 gate/citations.py                   # offline
+python3 gate/citations.py --online          # also resolve every source URL
+python3 gate/citations.py --sarif out.json
+```
+
+Exit `0` clean · `1` findings · `2` the gate itself could not run.
+
+**`provenance: unverified` is not a failure and does not fail the build.** It is the honest
+outcome, and the gate requires a `provenance_note` beside it saying exactly what could not be
+confirmed — an unverified mark with no explanation *does* go red. The count of unverified
+sources prints on **every** run, clean or not, because an admission that only appears on red
+runs is an admission nobody reads.
+
+The file is shared byte-for-byte with the sibling harnesses. It is the only gate logic this
+family holds in common, deliberately: a fabricated citation is the same defect in every
+tradition, and four of the ten public harnesses shipped one.
+
 ## The first word
 
 Every session opens the same way — a fixed maxim, then one rotating proverb.
@@ -147,10 +179,10 @@ The **fixed maxim**, never changed:
 > **Umuntu ngumuntu ngabantu** — a person is a person through other persons.
 > The code is a person through the people who inherit it.
 
-Then the **proverb of the day**, rotated daily from [`proverbs.txt`](proverbs.txt) and listed in full in [PROVERBS.md](PROVERBS.md) — genuine folklore, each line carried under the name of the people it comes from wherever the record supports it, never flattened into a single voice:
+Then the **proverb of the day**, rotated daily from [`proverbs.txt`](proverbs.txt) and listed in full in [PROVERBS.md](PROVERBS.md) — African folklore, each line carried under the name of the people it is attributed to, never flattened into a single voice. How well each attribution is actually documented is recorded per line in [`sources/`](sources/), and most of them are documented less well than the confident label suggests:
 
 > *"Sticks in a bundle are unbreakable."*
-> — **Bondei** (Tanzania), the emblem-proverb of collective strength.
+> — attributed to the **Bondei** (Tanzania), the emblem-proverb of collective strength. *(That attribution is the least documented in the repo — see [`sources/bondei-sticks-in-a-bundle.yml`](sources/bondei-sticks-in-a-bundle.yml).)*
 
 Others in the rotation, so you can hear the range:
 
@@ -165,7 +197,8 @@ Early, but real — and here is the true state, since SPEAKING TRUE applies to t
 
 - **The codex is complete and stable.** The four disciplines, the precedence, and the falsifiers are settled. This is the Ubuntu edition in a small family of conduct codices that skin the same four disciplines in different traditions; each stands on its own, and this one is whole.
 - **The wiring ships now.** The paste block and the session-start hook work today. Drop them in and the discipline is live.
-- **The machinery is catching up.** The right-hand "engineering" column — the automated gate scripts that *prove* each discipline — is landing one discipline at a time. **One has landed:** [`gate/nobody_left.py`](gate/nobody_left.py) enforces HARAMBEE rule 2, *nothing half-done*, on the diff. That is one falsifier out of sixteen; the other fifteen are still run by hand, or by the agent's own discipline.
+- **The machinery is catching up.** The right-hand "engineering" column — the automated gate scripts that *prove* each discipline — is landing one discipline at a time. **Two have landed:** [`gate/nobody_left.py`](gate/nobody_left.py) enforces HARAMBEE rule 2, *nothing half-done*, on the diff; [`gate/citations.py`](gate/citations.py) enforces the *source* clause of SPEAK TRUE rule 4, *invent nothing*. That is two falsifiers out of sixteen — and the second one covers one clause of its rule, not the whole of it: nothing here can see a report that reads greener than the tree, or a summary whose meaning shifted from what it relayed. THE COMMONS and INDABA still have nothing.
+- **What the second gate found here.** Stated plainly, because SPEAKING TRUE applies hardest to the section describing the repo's own honesty: **ten of the thirteen proverbs are marked `provenance: unverified`.** They circulate widely and they are not thereby fake — oral folklore is genuinely hard to source — but their ethnic attributions rest on web proverb lists copying one another rather than on an ethnographic record, and for four of them the best index available names a different people. That includes *"Sticks in a bundle are unbreakable"*, which this README presents above as the Bondei emblem-proverb: the African Proverbs project's inventory of 131 named collections **does not list the Bondei at all**. The three that do clear the bar are the Akan old-woman proverb, the Akan and Ewe baobab proverb, and the Swahili *haba na haba*. Details per line in [`sources/`](sources/).
 
 Settled names, growing tooling. Use it now for the conduct; watch this space for the gates.
 
