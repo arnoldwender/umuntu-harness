@@ -83,6 +83,7 @@ The left column is *why* an agent still does the right thing at 3 a.m. — a nam
 - **Paste the block.** Drop the contents of [`codex-block.md`](codex-block.md) into the instructions your agent already reads — `AGENTS.md`, `CLAUDE.md`, a system prompt, whatever your harness loads. It is the single source the hook and your agent file share.
 - **Or wire the hook.** [`hooks/session-start.sh`](hooks/session-start.sh) emits the first word and the conduct block at the top of every session — see [hooks/](hooks/).
 - **Run the gate.** [`gate/nobody_left.py`](gate/nobody_left.py) reads your diff and refuses one that touched a set in part — the locale file whose siblings never moved. See [The parity gate](#the-parity-gate).
+- **And the live one.** [`hooks/nobody-left-at-stop.py`](hooks/nobody-left-at-stop.py) runs the same gate over what the turn changed when the agent stops, and hands a set moved in part back to the agent before the turn is over — see [hooks/](hooks/) and *Live, when the agent stops* below.
 - **Read the whole codex.** [`CODEX.md`](CODEX.md) carries all sixteen rules — four to a discipline, one falsifier each — with the proverb that opens every discipline.
 - **Or install it as an Agent Skill.** [`SKILL.md`](SKILL.md) packages the same block in the
   [Agent Skills](https://agentskills.io/specification) format: clone this repository into your
@@ -135,6 +136,18 @@ The pattern form marks where the locale sits in the path, so `src/pages/de/preis
 With no config file at all, the gate infers sets from the tree: sibling files that differ only in a locale code (`de en es fr it pt`), and **only when those siblings actually exist**. It will not demand a Spanish file nobody ever wrote — a repo with one locale is not a bug. Inferred sets are labelled `(autodetected)` in the report, so you always know whether the gate is enforcing your declaration or its own guess.
 
 [`.conduct/parity-allow.txt`](.conduct/parity-allow.txt) suppresses findings by path glob, optionally scoped to one check (`key-parity:src/i18n/*`). The gate prints how many findings the allowlist swallowed, every run — an allowlist that hides its own size is how a repo ends up green with exemptions nobody remembers granting.
+
+### Live, when the agent stops — `hooks/nobody-left-at-stop.py`
+
+The gate judges a diff, which is the right unit for CI and the wrong moment for the agent: by the time CI runs, the turn that left `en.json` behind is over. So the same gate also runs as a Claude Code `Stop` hook. When the agent finishes its turn, the hook diffs what **the turn** changed — the base is where the tree stood when the hook last ran for this session, so a locale file edited and committed alone is still caught — runs the gate with the working directory as its root, and, if a set moved in part, hands the finding back as hook feedback. The agent reads it and continues once, with the siblings still open in front of it:
+
+> nobody-left: this turn moved a set in part. [cohort-drift] … src/i18n/de.json changed, but src/i18n/en.json, src/i18n/es.json did not — nobody gets left behind. HARAMBEE 2, nothing half-done: bring the siblings along before you finish …
+
+Why not before each edit: parity is a property of a set, and the moment `de.json` is edited its siblings are not yet behind. A hook that fired there would fire on every well-ordered turn, and a hook that fires on good work is switched off by the second week.
+
+A Stop hook that keeps the conversation going has to know when to stop itself, and this one has three brakes, each with a test: the runtime's `stop_hook_active` flag (one nudge per turn, never a second), a finding signature that is never fed back twice (the human is told instead, the agent is not sent round again), and the runtime's own cap of eight continuations. `notify` and `block` modes exist for whoever wants the human told only, or the runtime's stronger form of the same continuation. Every run leaves a receipt — verdict, checks, the commit the turn started from. Wiring, modes and limits in [hooks/](hooks/); 18 tests and 5 mutants in [`tests/`](tests/).
+
+What this hook cannot measure in advance: its false-positive rate on other people's sessions. A Stop hook cannot be replayed over recorded transcripts the way a per-command hook can — the trees those turns changed no longer exist — so the number that would justify `block` has to come from the receipts of whoever wires it. Until then it feeds back; it does not block.
 
 ### What this does NOT automate
 
@@ -200,7 +213,7 @@ Others in the rotation, so you can hear the range:
 Early, but real — and here is the true state, since SPEAKING TRUE applies to the harness describing itself.
 
 - **The codex is complete and stable.** The four disciplines, the precedence, and the falsifiers are settled. This is the Ubuntu edition in a small family of conduct codices that skin the same four disciplines in different traditions; each stands on its own, and this one is whole.
-- **The wiring ships now.** The paste block and the session-start hook work today. Drop them in and the discipline is live.
+- **The wiring ships now.** The paste block and the session-start hook work today. Drop them in and the discipline is live. So does [`hooks/nobody-left-at-stop.py`](hooks/nobody-left-at-stop.py): the parity gate at the end of every turn, feeding a set moved in part back to the agent before the turn is over.
 - **The machinery is catching up.** The right-hand "engineering" column — the automated gate scripts that *prove* each discipline — is landing one discipline at a time. **Two have landed:** [`gate/nobody_left.py`](gate/nobody_left.py) enforces HARAMBEE rule 2, *nothing half-done*, on the diff; [`gate/citations.py`](gate/citations.py) enforces the *source* clause of SPEAK TRUE rule 4, *invent nothing*. That is two falsifiers out of sixteen — and the second one covers one clause of its rule, not the whole of it: nothing here can see a report that reads greener than the tree, or a summary whose meaning shifted from what it relayed. THE COMMONS and INDABA still have nothing.
 - **What the second gate found here.** Stated plainly, because SPEAKING TRUE applies hardest to the section describing the repo's own honesty: **ten of the thirteen proverbs are marked `provenance: unverified`.** They circulate widely and they are not thereby fake — oral folklore is genuinely hard to source — but their ethnic attributions rest on web proverb lists copying one another rather than on an ethnographic record, and for four of them the best index available names a different people. That includes *"Sticks in a bundle are unbreakable"*, which this README presents above as the Bondei emblem-proverb: the African Proverbs project's inventory of 131 named collections **does not list the Bondei at all**. The three that do clear the bar are the Akan old-woman proverb, the Akan and Ewe baobab proverb, and the Swahili *haba na haba*. Details per line in [`sources/`](sources/).
 

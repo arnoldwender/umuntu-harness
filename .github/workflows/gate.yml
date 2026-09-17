@@ -86,6 +86,37 @@ jobs:
       - name: Mutation check (do the tests defend the citation gate?)
         run: python3 tests/mutation_check_citations.py
 
+      # The live hook is the parity gate at the end of the agent's turn. CI cannot
+      # run a session, so it proves the hook still has teeth: its own mutants die,
+      # and a planted turn that moved one locale alone is handed back.
+      - name: Mutation check (do the tests defend the live hook?)
+        run: python3 tests/mutation_check_nobody_left_hook.py
+
+      - name: The live hook — one locale moved alone must be handed back at Stop
+        run: |
+          python3 - <<'PY'
+          import json, os, subprocess, sys, tempfile
+          d = tempfile.mkdtemp()
+          def w(rel, text):
+              p = os.path.join(d, rel); os.makedirs(os.path.dirname(p), exist_ok=True)
+              open(p, "w").write(text)
+          w(".conduct/cohorts.toml", '[[cohort]]\nname = "locales"\nmembers = ["src/i18n/de.json", "src/i18n/en.json"]\n')
+          w("src/i18n/de.json", '{"a": 1}\n'); w("src/i18n/en.json", '{"a": 1}\n')
+          g = lambda *a: subprocess.run(["git", "-C", d, *a], check=True, capture_output=True)
+          g("init", "-q", "-b", "main"); g("config", "user.email", "ci@example.invalid"); g("config", "user.name", "CI")
+          g("config", "commit.gpgsign", "false"); g("add", "-A"); g("commit", "-q", "-m", "base")
+          w("src/i18n/de.json", '{"a": 2}\n')
+          payload = {"session_id": "ci", "cwd": d, "hook_event_name": "Stop", "stop_hook_active": False}
+          r = subprocess.run([sys.executable, "hooks/nobody-left-at-stop.py"], input=json.dumps(payload),
+                             capture_output=True, text=True, env={**os.environ, "NOBODY_LEFT_RECEIPTS": "off"})
+          out = json.loads(r.stdout) if r.stdout.strip() else {}
+          text = (out.get("hookSpecificOutput") or {}).get("additionalContext", "")
+          if r.returncode != 0 or "src/i18n/en.json" not in text:
+              print(f"the hook returned {r.returncode} and said {text!r}; expected en.json to be named", file=sys.stderr)
+              sys.exit(1)
+          print("the hook handed the sibling left behind back to the agent, as it must:", text[:90])
+          PY
+
       - name: Tests
         run: python3 -m pytest tests/ -q
 
