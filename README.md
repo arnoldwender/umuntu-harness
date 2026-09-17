@@ -84,6 +84,10 @@ The left column is *why* an agent still does the right thing at 3 a.m. — a nam
 - **Or wire the hook.** [`hooks/session-start.sh`](hooks/session-start.sh) emits the first word and the conduct block at the top of every session — see [hooks/](hooks/).
 - **Run the gate.** [`gate/nobody_left.py`](gate/nobody_left.py) reads your diff and refuses one that touched a set in part — the locale file whose siblings never moved. See [The parity gate](#the-parity-gate).
 - **Read the whole codex.** [`CODEX.md`](CODEX.md) carries all sixteen rules — four to a discipline, one falsifier each — with the proverb that opens every discipline.
+- **Or install it as an Agent Skill.** [`SKILL.md`](SKILL.md) packages the same block in the
+  [Agent Skills](https://agentskills.io/specification) format: clone this repository into your
+  agent's skills directory as `umuntu-harness/` (the directory name must match the skill name).
+  Verified on Claude Code 2.1.273 (2026-09-17); other hosts that read the format were not run.
 - **Always active; intensity scales with the stakes.** You do not invoke it: a light touch for a typo fix, the full council for a migration or a destructive command.
 
 ## The parity gate
